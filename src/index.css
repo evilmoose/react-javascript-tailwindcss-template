@@ -1,20 +1,54 @@
 @import "tailwindcss";
 
-/* Fix for button text visibility */
+/* 
+ * Fix for text color in elements with bg-primary
+ * This ensures text is visible without hardcoding colors
+ */
 .bg-primary {
-  color: white !important;
+  @apply text-white;
 }
 
-/* Fix for button text in general */
+/* 
+ * Ensure buttons and links with primary background have correct text color
+ * Using Tailwind's apply directive to leverage the theme
+ */
+button[type="submit"],
+button.bg-primary,
+a.bg-primary {
+  @apply bg-primary text-white;
+}
+
+/* 
+ * Hover states for primary buttons and links
+ * Using Tailwind's apply directive for hover colors
+ */
+a.bg-primary:hover,
+button.bg-primary:hover,
+button[type="submit"]:hover {
+  @apply bg-neutral-800;
+}
+
+/* Legacy fixes - can be removed once all components are updated */
 a.inline-flex {
   color: inherit !important;
 }
 
-/* Ensure text in buttons with primary background is white */
 a[class*="bg-primary"] span,
 a[class*="bg-primary"],
 button[class*="bg-primary"],
 button[class*="bg-primary"] span {
-  color: white !important;
+  @apply text-white;
+}
+
+a[href="/signup"] {
+  @apply text-white;
+}
+
+a[href="/signup"] span {
+  @apply text-white;
+}
+
+a[href="/signup"].bg-primary {
+  @apply bg-primary text-white;
 }
 

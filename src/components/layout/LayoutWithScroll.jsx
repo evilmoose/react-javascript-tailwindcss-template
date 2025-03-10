@@ -7,7 +7,7 @@ import React from 'react';
 
 const LayoutWithScroll = ({ children }) => {
     return (
-      <div className="h-[calc(100vh-104px)] bg-page-background overflow-hidden">
+      <div className="h-[calc(100vh-104px)] bg-neutral-100 overflow-hidden">
         <div className="h-full overflow-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="max-w-7xl mx-auto">
             {children}

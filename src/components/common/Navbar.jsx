@@ -11,6 +11,7 @@ const Navbar = () => {
     const navigate = useNavigate();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
+    const dropdownRef = useRef(null);
 
     const handleLogout = () => {
         logout();
@@ -28,7 +29,7 @@ const Navbar = () => {
         document.addEventListener("mousedown", handleClickOutside);
         
         return () => {
-        document.removeEventListener("mousedown", handleClickOutside);
+          document.removeEventListener("mousedown", handleClickOutside);
         };
     }, []);
 
@@ -40,7 +41,7 @@ const Navbar = () => {
         };
         
         return (
-          <button className={`px-md py-sm rounded-md ${variants[variant]}`}>
+          <button className={`px-4 py-2 rounded-md ${variants[variant]}`} style={{ color: 'white' }}>
             {children}
           </button>
         );
@@ -72,26 +73,9 @@ const Navbar = () => {
                   Dashboard
                 </Link>
               )}
-              {isAdmin && (
-                <Link
-                  to="/blog/new"
-                  className="px-3 py-2 rounded-md text-sm font-medium text-primary"
-                >
-                  New Post
-                </Link>
-              )}
+
               {currentUser ? (
                 <>
-                  <Link 
-                    to="/pdf-upload" 
-                    className="flex items-center px-4 py-2 rounded-md text-sm font-medium bg-primary text-white hover:bg-primary-dark transition-colors duration-200"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                    </svg>
-                    PDF Upload
-                  </Link>
-
                   {/* User dropdown */}
                   <div className="ml-3 relative" ref={dropdownRef}>
                     <div>
@@ -135,10 +119,9 @@ const Navbar = () => {
                   </Link>
                   <Link 
                     to="/signup" 
-                    className="px-4 py-2 rounded-md text-sm font-medium bg-primary hover:bg-neutral-800 transition-colors"
-                    style={{ backgroundColor: 'black', color: 'white !important' }}
+                    className="px-4 py-2 rounded-md text-sm font-medium bg-primary text-white hover:bg-neutral-800 transition-colors"
                   >
-                    <span style={{ color: 'white' }}>Sign Up</span>
+                    Sign Up
                   </Link>
                 </>
               )}
@@ -147,7 +130,6 @@ const Navbar = () => {
 
           {/* Mobile menu button */}
           <div className="flex items-center sm:hidden">
-            {currentUser}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="inline-flex items-center justify-center p-2 rounded-md text-neutral-700 hover:text-primary hover:bg-neutral-100 focus:outline-none"
@@ -223,13 +205,11 @@ const Navbar = () => {
                 >
                   Login
                 </Link>
-                <Link
-                  to="/signup"
-                  className="block px-3 py-2 rounded-md text-base font-medium bg-primary hover:bg-neutral-800 transition-colors"
-                  style={{ backgroundColor: 'black', color: 'white !important' }}
-                  onClick={() => setIsMenuOpen(false)}
+                <Link 
+                  to="/signup" 
+                  className="block px-3 py-2 rounded-md text-base font-medium bg-primary text-white hover:bg-neutral-800 transition-colors"
                 >
-                  <span style={{ color: 'white' }}>Sign Up</span>
+                  Sign Up
                 </Link>
               </>
             )}

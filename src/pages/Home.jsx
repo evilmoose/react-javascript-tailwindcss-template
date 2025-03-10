@@ -2,7 +2,7 @@
  * Home page component.
  */
 import HeroSection from '../components/home/HeroSection';
-import LeadForm from '../components/auth/AuthForm';
+import LeadForm from '../components/home/LeadForm';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import NormalScrollLayout from '../components/common/NormalScrollLayout';

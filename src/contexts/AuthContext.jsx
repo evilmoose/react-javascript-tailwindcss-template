@@ -7,6 +7,11 @@ import { formatAuthError, getCurrentUser, clearAuth } from '../utils/auth';
 
 const AuthContext = createContext();
 
+// Helper function to get the base API URL
+const getApiBaseUrl = () => {
+  return import.meta.env.VITE_API_URL || '';
+};
+
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
@@ -29,7 +34,7 @@ export const AuthProvider = ({ children }) => {
         setError(null);
         
         try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/auth/jwt/login`, {
+        const response = await fetch(`${getApiBaseUrl()}/api/v1/auth/jwt/login`, {
             method: 'POST',
             headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -50,7 +55,7 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem('token', data.access_token);
         
         // Fetch user data
-        const userResponse = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/users/me`, {
+        const userResponse = await fetch(`${getApiBaseUrl()}/api/v1/users/me`, {
             headers: {
             'Authorization': `Bearer ${data.access_token}`
             }
@@ -85,7 +90,7 @@ export const AuthProvider = ({ children }) => {
         const first_name = nameParts[0];
         const last_name = nameParts.length > 1 ? nameParts.slice(1).join(' ') : '';
         
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/auth/register`, {
+        const response = await fetch(`${getApiBaseUrl()}/api/v1/auth/register`, {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json',
